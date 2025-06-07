@@ -11,7 +11,7 @@
     xmlns:Views="clr-namespace:parkSmart.Views">
 
     <Shell.FlyoutHeader>
-        <StackLayout Background="MediumPurple">
+        <StackLayout Background="Yellow">
             <Image Source="dotnet_bot.png"
                    HeightRequest="200"/>
         </StackLayout>
