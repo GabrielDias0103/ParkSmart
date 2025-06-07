@@ -6,4 +6,19 @@ public partial class PgListagem : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void btnAplicarFiltros_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void btnPagamento_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void btnExcluir_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

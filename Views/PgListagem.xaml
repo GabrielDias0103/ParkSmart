@@ -3,10 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="parkSmart.Views.PgListagem"
              Title="PgListagem">
-    <VerticalStackLayout>
-        <Label 
-            Text="Listagem"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Entry x:Name="FiltroPlacaEntry" Placeholder="Filtrar por Placa" />
+            <DatePicker x:Name="FiltroDataPicker" />
+            <Picker x:Name="FiltroStatusPicker" Title="Status Pagamento">
+                <Picker.Items>
+                    <x:String>Todos</x:String>
+                    <x:String>Pago</x:String>
+                    <x:String>Não Pago</x:String>
+                </Picker.Items>
+            </Picker>
+            <Button Text="Aplicar Filtros" Clicked="btnAplicarFiltros_Clicked" />
+            <ListView x:Name="VeiculosListView" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Placa}" FontAttributes="Bold" />
+                                <Label Text="{Binding Marca}" />
+                                <Label Text="{Binding Modelo}" />
+                                <Label Text="{Binding Cor}" />
+                                <Label Text="{Binding NomeProprietario}" />
+                                <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" />
+                                <Label Text="{Binding DataSaida, StringFormat='Saída: {0:dd/MM/yyyy HH:mm}'}" IsVisible="{Binding DataSaida, Converter={StaticResource NullToBoolConverter}}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Text="Pagamento" Clicked="btnPagamento_Clicked" CommandParameter="{Binding .}" />
+                                    <Button Text="Excluir" Clicked="btnExcluir_Clicked" CommandParameter="{Binding .}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
