@@ -10,6 +10,7 @@
     Shell.TabBarIsVisible="False"
     xmlns:Views="clr-namespace:parkSmart.Views">
 
+    
     <Shell.FlyoutHeader>
         <StackLayout BackgroundColor="White">
             <Image Source="parksmart.png"
