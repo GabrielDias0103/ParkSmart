@@ -23,17 +23,17 @@
         FlyoutDisplayOptions="AsMultipleItems">
 
         <ShellContent Title="Pagina Inicial"
-                      Icon="img.png"
+                      Icon="casa.png"
                       ContentTemplate=
                       "{DataTemplate Views:PgInicial}"/>
 
         <ShellContent Title="Cadastro Cliente"
-                      Icon="img.png"
+                      Icon="carro.png"
                       ContentTemplate=
                       "{DataTemplate Views:Pgcadastro}"/>
 
         <ShellContent Title="Listagem de veículos"
-                      Icon="img.png"
+                      Icon="carros.png"
                       ContentTemplate=
                       "{DataTemplate Views:PgListagem}"/>
     </FlyoutItem>
