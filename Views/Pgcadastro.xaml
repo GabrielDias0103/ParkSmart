@@ -16,9 +16,9 @@
                     <x:String>Diario</x:String>
                 </Picker.Items>
             </Picker>
-            <Button Text="Selecionar Foto" Clicked="btnSelecionarFoto_Clicked" />
+            <Button Text="Selecionar Foto" Clicked="btnSelecionarFoto_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
             <Image x:Name="FotoImage" HeightRequest="200" />
-            <Button Text="Salvar" Clicked="btnSalvar_Clicked" />
+            <Button Text="Salvar" Clicked="btnSalvar_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
