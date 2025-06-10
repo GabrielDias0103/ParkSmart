@@ -5,20 +5,31 @@
              Title="Pgcadastro">
     <ScrollView>
         <StackLayout Padding="10">
-            <Entry x:Name="Placa" Placeholder="Placa" />
-            <Entry x:Name="Marca" Placeholder="Marca" />
-            <Entry x:Name="Modelo" Placeholder="Modelo" />
-            <Entry x:Name="Cor" Placeholder="Cor" />
-            <Entry x:Name="NomeProprietario" Placeholder="Nome do Proprietário" />
+            <Entry x:Name="txtPlaca" Placeholder="Placa" />
+            <Entry x:Name="txtMarca" Placeholder="Marca" />
+            <Entry x:Name="txtModelo" Placeholder="Modelo" />
+            <Entry x:Name="txtCor" Placeholder="Cor" />
+            <Entry x:Name="txtNomeProprietario" Placeholder="Nome do Proprietário" />
             <Picker x:Name="TipoPicker" Title="Tipo">
                 <Picker.Items>
                     <x:String>Mensalista</x:String>
                     <x:String>Diario</x:String>
                 </Picker.Items>
             </Picker>
+            <HorizontalStackLayout>
+                <CheckBox x:Name="checkPago" />
+                <Label Text="Pago?" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <DatePicker x:Name="datePickerEntrada" />
+            <TimePicker x:Name="timePickerEntrada" />
+            <DatePicker x:Name="datePickerSaida" />
+            <TimePicker x:Name="timePickerSaida" />
+
             <Button Text="Selecionar Foto" Clicked="btnSelecionarFoto_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
             <Image x:Name="FotoImage" HeightRequest="200" />
             <Button Text="Salvar" Clicked="btnSalvar_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
+            <Button Text="Remover" x:Name="btnRemover" Clicked="btnRemover_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
         </StackLayout>
     </ScrollView>
 </ContentPage>
