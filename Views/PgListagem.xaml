@@ -21,15 +21,30 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
+                                <Image Source="{Binding FotoVeic}" WidthRequest="350" HeightRequest="200" Aspect="AspectFill" />
                                 <Label Text="{Binding Placa}" FontAttributes="Bold" />
                                 <Label Text="{Binding Marca}" />
                                 <Label Text="{Binding Modelo}" />
                                 <Label Text="{Binding Cor}" />
                                 <Label Text="{Binding NomeProprietario}" />
                                 <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" />
-                                <StackLayout Orientation="Horizontal">
-                                    <Button Text="Pagamento" Clicked="btnPagamento_Clicked" CommandParameter="{Binding .}"  />
-                                    <Button Text="Excluir" Clicked="btnExcluir_Clicked" CommandParameter="{Binding .}" />
+                                
+                                <StackLayout HorizontalOptions="End" Orientation="Horizontal" Spacing="10">
+                                    <Image Source="selecionado.png" WidthRequest="30" HeightRequest="30">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Tapped="btnPagamento_Clicked"
+                                                CommandParameter="{Binding .}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+
+                                        <Image Source="lixeira.png" WidthRequest="30" HeightRequest="30">
+                                            <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Tapped="btnExcluir_Clicked"
+                                                CommandParameter="{Binding .}"/>    
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>
