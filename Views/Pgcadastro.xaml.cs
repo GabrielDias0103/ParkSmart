@@ -5,13 +5,18 @@ using parkSmart.Services;
 
 public partial class Pgcadastro : ContentPage
 {
-    private VeiculosController veiculosController ;
+    private VeiculosController veiculosController;
+    private DateTime dataEntrada;
 
     public Pgcadastro()
 	{
 		InitializeComponent();
 
         veiculosController = new VeiculosController();
+        dataEntrada = DateTime.Now;
+
+        // Define a data/hora atual na label ao abrir a tela
+        lblDataHoraEntrada.Text = dataEntrada.ToString("dd/MM/yyyy HH:mm");
     }
 
 
@@ -34,9 +39,6 @@ public partial class Pgcadastro : ContentPage
         string cor = txtCor.Text;
         string nomeProprietario = txtNomeProprietario.Text;
         string tipoPlano = TipoPicker.SelectedItem?.ToString();
-
-        DateTime dataEntrada = datePickerEntrada.Date + timePickerEntrada.Time;
-        DateTime dataSaida = datePickerSaida.Date + timePickerSaida.Time;
 
         //Validar os registro
         if (string.IsNullOrEmpty(placa) ||
@@ -62,9 +64,8 @@ public partial class Pgcadastro : ContentPage
         veiculo.NomeProprietario = nomeProprietario;
         veiculo.TipoPlano = tipoPlano;
         veiculo.FotoVeic = ImageService.CopiarImagem(sImagemSelecionada);
-        veiculo.DataEntrada = dataEntrada;
-        veiculo.DataSaida = dataSaida;
         veiculo.Pago = checkPago.IsChecked;
+        veiculo.DataEntrada = dataEntrada;
 
         //Chamara a rotina para copiar a imagem
         //e iremos gravar no banco
@@ -87,10 +88,6 @@ public partial class Pgcadastro : ContentPage
             txtNomeProprietario.Text = "";
             checkPago.IsChecked = false;
             TipoPicker.SelectedIndex = -1;
-            datePickerEntrada.Date = DateTime.Now;
-            timePickerEntrada.Time = TimeSpan.Zero;
-            datePickerSaida.Date = DateTime.Now;
-            timePickerSaida.Time = TimeSpan.Zero;
             LimparImagem();
         }
         else

@@ -21,10 +21,8 @@
                 <Label Text="Pago?" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
-            <DatePicker x:Name="datePickerEntrada" />
-            <TimePicker x:Name="timePickerEntrada" />
-            <DatePicker x:Name="datePickerSaida" />
-            <TimePicker x:Name="timePickerSaida" />
+            <Label Text="Data e Hora definida automaticamente:" FontAttributes="Italic" />
+            <Label x:Name="lblDataHoraEntrada" Text="" FontAttributes="Italic" />
 
             <Button Text="Selecionar Foto" Clicked="btnSelecionarFoto_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
             <Image x:Name="FotoImage" HeightRequest="200" />

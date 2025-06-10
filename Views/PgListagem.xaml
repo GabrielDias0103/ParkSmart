@@ -15,6 +15,7 @@
                 </Picker.Items>
             </Picker>
             <Button Text="Aplicar Filtros" Clicked="btnAplicarFiltros_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
+            
             <ListView x:Name="VeiculosListView" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -26,7 +27,6 @@
                                 <Label Text="{Binding Cor}" />
                                 <Label Text="{Binding NomeProprietario}" />
                                 <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" />
-                                <Label Text="{Binding DataSaida, StringFormat='Saída: {0:dd/MM/yyyy HH:mm}'}" IsVisible="{Binding DataSaida, Converter={StaticResource NullToBoolConverter}}" />
                                 <StackLayout Orientation="Horizontal">
                                     <Button Text="Pagamento" Clicked="btnPagamento_Clicked" CommandParameter="{Binding .}"  />
                                     <Button Text="Excluir" Clicked="btnExcluir_Clicked" CommandParameter="{Binding .}" />
