@@ -39,10 +39,16 @@ public partial class Pgcadastro : ContentPage
         string cor = txtCor.Text;
         string nomeProprietario = txtNomeProprietario.Text;
         string tipoPlano = TipoPicker.SelectedItem?.ToString();
+        string fotoVeic = sImagemSelecionada?.ToString();
+        
 
         //Validar os registro
         if (string.IsNullOrEmpty(placa) ||
-            string.IsNullOrEmpty(marca)) 
+            string.IsNullOrEmpty(marca) ||
+                string.IsNullOrEmpty(cor) ||
+                string.IsNullOrEmpty(tipoPlano) ||
+                string.IsNullOrEmpty(modelo) ||
+                string.IsNullOrEmpty(fotoVeic))
                 
         {
             //Se um dos dois estiver vazio
