@@ -31,20 +31,42 @@ public partial class PgListagem : ContentPage
         DateTime? dataFiltro = FiltroDataPicker.Date;
         string statusFiltro = FiltroStatusPicker.SelectedItem?.ToString();
 
-        var filtrados = listaOriginal.Where(v =>
+        // Filtro por placa e data
+        var veiculos = listaOriginal.Where(v =>
             (string.IsNullOrEmpty(placaFiltro) || v.Placa.ToLower().Contains(placaFiltro)) &&
-            (v.DataEntrada.Date == dataFiltro.Value.Date) &&
-            (statusFiltro == "Todos" ||
-                (statusFiltro == "Pago" && v.Pago) ||
-                (statusFiltro == "Não Pago" && !v.Pago))
+            (v.DataEntrada.Date == dataFiltro.Value.Date)
         ).ToList();
 
-        VeiculosListView.ItemsSource = filtrados;
+        // Filtro por status de pagamento
+        if (statusFiltro == "Pago")
+            veiculos = veiculos.Where(v => v.Pago).ToList();
+        else if (statusFiltro == "Não Pago")
+            veiculos = veiculos.Where(v => !v.Pago).ToList();
+
+        VeiculosListView.ItemsSource = veiculos;
     }
 
-    private void btnPagamento_Clicked(object sender, EventArgs e)
+    private async void btnPagamento_Clicked(object sender, EventArgs e)
     {
+        var image = sender as Image;
+        var veiculo = image?.BindingContext as Veiculos;
+        if (veiculo == null) return;
 
+        // Mensagem de confirmação
+        bool confirmar = await DisplayAlert("Confirmação", "Deseja realmente marcar este veículo como pago?", "Sim", "Não");
+        if (!confirmar)
+            return;
+
+        // Atualiza o status para pago
+        veiculo.Pago = true;
+
+        // Atualize no banco de dados
+        var controller = new VeiculosController();
+        await controller.AtualizarStatusPagamentoAsync(veiculo.Placa, true);
+
+        // Atualize a lista (se necessário, recarregue os dados)
+        await DisplayAlert("Pagamento", "Status de pagamento atualizado!", "OK");
+        // Opcional: Reaplique filtros se estiverem ativos
     }
 
     private async void btnExcluir_Clicked(object sender, EventArgs e)

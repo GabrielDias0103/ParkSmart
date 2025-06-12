@@ -4,8 +4,8 @@
              x:Class="parkSmart.Views.Pgcadastro"
              Title="Pgcadastro">
     <ScrollView>
-        <StackLayout Padding="10">
-            <Entry x:Name="txtPlaca" Placeholder="Placa" />
+        <StackLayout Padding="10" Spacing="10">
+            <Entry x:Name="txtPlaca" Placeholder="Placa" Unfocused="txtPlaca_Unfocused"/>
             <Entry x:Name="txtMarca" Placeholder="Marca" />
             <Entry x:Name="txtModelo" Placeholder="Modelo" />
             <Entry x:Name="txtCor" Placeholder="Cor" />
@@ -24,10 +24,10 @@
             <Label Text="Data e Hora definida automaticamente:" FontAttributes="Italic" />
             <Label x:Name="lblDataHoraEntrada" Text="" FontAttributes="Italic" />
 
-            <Button Text="Selecionar Foto" Clicked="btnSelecionarFoto_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
+            <Button Text="Selecionar Foto" HorizontalOptions="Center" Clicked="btnSelecionarFoto_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
             <Image x:Name="FotoImage" HeightRequest="200" />
-            <Button Text="Salvar" Clicked="btnSalvar_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
-            <Button Text="Remover" x:Name="btnRemover" Clicked="btnRemover_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
+            <Button Text="Salvar" WidthRequest="150"  HorizontalOptions="Center" Clicked="btnSalvar_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
+            <Button Text="Remover" WidthRequest="150" HorizontalOptions="Center" x:Name="btnRemover" Clicked="btnRemover_Clicked" BackgroundColor="#0E99FF" TextColor="White" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

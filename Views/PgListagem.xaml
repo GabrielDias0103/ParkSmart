@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:parkSmart.Converters"
              x:Class="parkSmart.Views.PgListagem"
              Title="PgListagem">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ScrollView>
-        <StackLayout Padding="10">
+        <StackLayout Padding="10" Spacing="10">
             <Entry x:Name="FiltroPlacaEntry" Placeholder="Filtrar por Placa" />
             <DatePicker x:Name="FiltroDataPicker" />
             <Picker x:Name="FiltroStatusPicker" Title="Status Pagamento">
@@ -14,35 +22,37 @@
                     <x:String>Não Pago</x:String>
                 </Picker.Items>
             </Picker>
-            <Button Text="Aplicar Filtros" Clicked="btnAplicarFiltros_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
+            <Button Text="Aplicar Filtros" HorizontalOptions="Center" Clicked="btnAplicarFiltros_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
             
             <ListView x:Name="VeiculosListView" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10">
-                                <Image Source="{Binding FotoVeic}" WidthRequest="350" HeightRequest="200" Aspect="AspectFill" />
-                                <Label Text="{Binding Placa}" FontAttributes="Bold" />
-                                <Label Text="{Binding Marca}" />
-                                <Label Text="{Binding Modelo}" />
-                                <Label Text="{Binding Cor}" />
-                                <Label Text="{Binding NomeProprietario}" />
-                                <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" />
-                                
-                                <StackLayout HorizontalOptions="End" Orientation="Horizontal" Spacing="10">
-                                    <Image Source="selecionado.png" WidthRequest="30" HeightRequest="30">
+                            <StackLayout Padding="10" Orientation="Horizontal" VerticalOptions="Center">
+                                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                                    <!-- <Image Source="{Binding FotoVeic}" WidthRequest="350" HeightRequest="200" Aspect="AspectFill" /> -->
+                                    <Label Text="{Binding Placa}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Marca}" />
+                                    <Label Text="{Binding Modelo}" />
+                                    <Label Text="{Binding Cor}" />
+                                    <Label Text="{Binding NomeProprietario}" />
+                                    <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" FontAttributes="Italic"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
+                                    <Image Source="selecionado.png" WidthRequest="30" HeightRequest="30" IsVisible="{Binding Pago, Converter={StaticResource InverseBoolConverter}}">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                Tapped="btnPagamento_Clicked"
-                                                CommandParameter="{Binding .}"/>
-                                            </Image.GestureRecognizers>
-                                        </Image>
+                                            Tapped="btnPagamento_Clicked"
+                                            CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
 
-                                        <Image Source="lixeira.png" WidthRequest="30" HeightRequest="30">
-                                            <Image.GestureRecognizers>
+                                    <Image Source="lixeira.png" WidthRequest="30" HeightRequest="30">
+                                        <Image.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                Tapped="btnExcluir_Clicked"
-                                                CommandParameter="{Binding .}"/>    
+                                            Tapped="btnExcluir_Clicked"
+                                            CommandParameter="{Binding .}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </StackLayout>
