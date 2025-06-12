@@ -18,11 +18,11 @@ namespace parkSmart.Controllers
             connection.CreateTable<Veiculos>();
 
         }
-    
+
 
         public bool Insert(Veiculos value)
         {
-            
+
             return connection.Insert(value) > 0;
         }
 
@@ -42,7 +42,7 @@ namespace parkSmart.Controllers
         //Consultar para retornoar todos os dados
         public List<Veiculos> GetAll()
         {
-            
+
             return
                 connection.Table<Veiculos>().ToList();
         }
@@ -50,7 +50,7 @@ namespace parkSmart.Controllers
         //Consultar por ID
         public Veiculos GetById(int value)
         {
-            
+
             return
                 connection.Find<Veiculos>(value);
         }
@@ -58,11 +58,25 @@ namespace parkSmart.Controllers
         //Consulta filtrando pelo Nome
         public List<Veiculos> GetByPlaca(string value)
         {
-           
+
             return
                 connection.Table<Veiculos>().
                 Where(x => x.Placa.Contains(value)).
                 ToList();
         }
+
+
+
+        public async Task<bool> AtualizarStatusPagamentoAsync(string placa, bool pago)
+        {
+            var veiculo = connection.Table<Veiculos>().FirstOrDefault(v => v.Placa == placa);
+            if (veiculo != null)
+            {
+                veiculo.Pago = pago;
+                return Update(veiculo);
+            }
+            return false;
+        }
     }
 }
+

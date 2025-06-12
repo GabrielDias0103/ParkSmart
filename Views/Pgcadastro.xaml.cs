@@ -20,6 +20,27 @@ public partial class Pgcadastro : ContentPage
     }
 
 
+    //metodo para limpar os campos do formulário caso o usuario sair da tela de cadastro
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Limpa todos os campos do formulário
+        txtPlaca.Text = "";
+        txtMarca.Text = "";
+        txtModelo.Text = "";
+        txtCor.Text = "";
+        txtNomeProprietario.Text = "";
+        checkPago.IsChecked = false;
+        TipoPicker.SelectedIndex = -1;
+        LimparImagem();
+
+        // Atualiza a data/hora de entrada
+        dataEntrada = DateTime.Now;
+        lblDataHoraEntrada.Text = dataEntrada.ToString("dd/MM/yyyy HH:mm");
+        sImagemSelecionada = null;
+    }
+
     private string sImagemSelecionada;
     private async void btnSelecionarFoto_Clicked(object sender, EventArgs e)
     {
@@ -58,6 +79,15 @@ public partial class Pgcadastro : ContentPage
                 "Preencha os campos corretamente.",
                 "OK");
             //Abortar a rotina
+            return;
+        }
+
+        // Antes de criar o objeto Veiculos
+        // Validação para verificar se já existe um veículo com a mesma placa
+        var veiculosExistentes = veiculosController.GetByPlaca(placa);
+        if (veiculosExistentes != null && veiculosExistentes.Count > 0)
+        {
+            DisplayAlert("Atenção", "Já existe um veículo cadastrado com esta placa.", "OK");
             return;
         }
 
@@ -117,5 +147,33 @@ public partial class Pgcadastro : ContentPage
     private void btnRemover_Clicked(object sender, EventArgs e)
     {
         LimparImagem();
+    }
+
+    private async void txtPlaca_Unfocused(object sender, FocusEventArgs e)
+    {
+        string placa = txtPlaca.Text?.Trim();
+
+        if (!string.IsNullOrEmpty(placa))
+        {
+            // Consulta por placa
+            var veiculos = veiculosController.GetByPlaca(placa);
+
+            if (veiculos != null && veiculos.Count > 0)
+            {
+                var veiculo = veiculos.First();
+
+                txtMarca.Text = veiculo.Marca;
+                txtModelo.Text = veiculo.Modelo;
+                txtCor.Text = veiculo.Cor;
+                txtNomeProprietario.Text = veiculo.NomeProprietario;
+                TipoPicker.SelectedItem = veiculo.TipoPlano;
+                checkPago.IsChecked = veiculo.Pago;
+                FotoImage.Source = veiculo.FotoVeic;
+                sImagemSelecionada = veiculo.FotoVeic;
+                btnRemover.IsVisible = !string.IsNullOrEmpty(veiculo.FotoVeic);
+
+                await DisplayAlert("Atenção", "Placa já cadastrada! Dados carregados.", "OK");
+            }
+        }
     }
 }
