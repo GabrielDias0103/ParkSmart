@@ -31,7 +31,6 @@ public partial class Pgcadastro : ContentPage
         txtModelo.Text = "";
         txtCor.Text = "";
         txtNomeProprietario.Text = "";
-        checkPago.IsChecked = false;
         TipoPicker.SelectedIndex = -1;
         LimparImagem();
 
@@ -100,7 +99,6 @@ public partial class Pgcadastro : ContentPage
         veiculo.NomeProprietario = nomeProprietario;
         veiculo.TipoPlano = tipoPlano;
         veiculo.FotoVeic = ImageService.CopiarImagem(sImagemSelecionada);
-        veiculo.Pago = checkPago.IsChecked;
         veiculo.DataEntrada = dataEntrada;
 
         //Chamara a rotina para copiar a imagem
@@ -122,7 +120,6 @@ public partial class Pgcadastro : ContentPage
             txtModelo.Text = "";
             txtCor.Text = "";
             txtNomeProprietario.Text = "";
-            checkPago.IsChecked = false;
             TipoPicker.SelectedIndex = -1;
             LimparImagem();
         }
@@ -167,7 +164,6 @@ public partial class Pgcadastro : ContentPage
                 txtCor.Text = veiculo.Cor;
                 txtNomeProprietario.Text = veiculo.NomeProprietario;
                 TipoPicker.SelectedItem = veiculo.TipoPlano;
-                checkPago.IsChecked = veiculo.Pago;
                 FotoImage.Source = veiculo.FotoVeic;
                 sImagemSelecionada = veiculo.FotoVeic;
                 btnRemover.IsVisible = !string.IsNullOrEmpty(veiculo.FotoVeic);

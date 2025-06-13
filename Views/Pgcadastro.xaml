@@ -16,10 +16,6 @@
                     <x:String>Diario</x:String>
                 </Picker.Items>
             </Picker>
-            <HorizontalStackLayout>
-                <CheckBox x:Name="checkPago" />
-                <Label Text="Pago?" VerticalOptions="Center" />
-            </HorizontalStackLayout>
 
             <Label Text="Data e Hora definida automaticamente:" FontAttributes="Italic" />
             <Label x:Name="lblDataHoraEntrada" Text="" FontAttributes="Italic" />
