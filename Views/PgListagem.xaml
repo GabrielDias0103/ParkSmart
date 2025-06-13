@@ -40,13 +40,23 @@
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
-                                    <Image Source="selecionado.png" WidthRequest="30" HeightRequest="30" IsVisible="{Binding Pago, Converter={StaticResource InverseBoolConverter}}">
+                                    <Image x:Name="ImagemAlerta"
+                                            Source="aviso.png"
+                                            WidthRequest="30"
+                                            HeightRequest="30">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Pago}" Value="True">
+                                                <Setter Property="Source" Value="selecionado.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer
-                                            Tapped="btnPagamento_Clicked"
-                                            CommandParameter="{Binding .}"/>
+                                                Tapped="btnPagamento_Clicked"
+                                                CommandParameter="{Binding .}" />
                                         </Image.GestureRecognizers>
                                     </Image>
+
 
                                     <Image Source="lixeira.png" WidthRequest="30" HeightRequest="30">
                                         <Image.GestureRecognizers>
