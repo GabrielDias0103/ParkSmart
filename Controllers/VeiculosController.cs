@@ -67,12 +67,14 @@ namespace parkSmart.Controllers
 
 
 
-        public async Task<bool> AtualizarStatusPagamentoAsync(string placa, bool pago)
+        public bool AtualizarStatusPagamentoAsync(string placa, bool pago, DateTime datasaida)
         {
+            
             var veiculo = connection.Table<Veiculos>().FirstOrDefault(v => v.Placa == placa);
             if (veiculo != null)
             {
                 veiculo.Pago = pago;
+                veiculo.DataSaida = datasaida;
                 return Update(veiculo);
             }
             return false;

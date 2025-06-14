@@ -37,6 +37,9 @@
                                     <Label Text="{Binding Cor}" />
                                     <Label Text="{Binding NomeProprietario}" />
                                     <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" FontAttributes="Italic"/>
+                                    <Label Text="{Binding DataSaida, StringFormat='Saída: {0:dd/MM/yyyy HH:mm}'}"
+                                            FontAttributes="Italic"
+                                            IsVisible="{Binding DataSaida, Converter={StaticResource NullToBoolConverter}}" />
                                 </StackLayout>
 
                                 <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">

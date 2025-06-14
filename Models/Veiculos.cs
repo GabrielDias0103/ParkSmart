@@ -20,19 +20,27 @@ namespace parkSmart.Models
         public string TipoPlano { get; set; }
         public string FotoVeic { get; set; }
         public DateTime DataEntrada { get; set; }
-        public DateTime DataSaida { get; set; }
+        public DateTime? DataSaida { get; set; }
 
         private bool pago;
         public bool Pago
         {
             get => pago;
-            set
+            set 
             {
                 if (pago != value)
                 {
                     pago = value;
                     OnPropertyChanged(nameof(Pago));
                 }
+
+                // Se o pagamento foi realizado, registra a data/hora de saída
+                if (pago && DataSaida == null)
+                {
+                    DataSaida = DateTime.Now;
+                    OnPropertyChanged(nameof(DataSaida));
+                }
+
             }
         }
 

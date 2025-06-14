@@ -66,12 +66,18 @@ public partial class PgListagem : ContentPage
         if (!confirmar)
             return;
 
-        // Atualiza o status para pago
-        veiculo.Pago = true;
+            // Atualiza o status para pago
+            var horaSaida = DateTime.Now;
+            veiculo.Pago = true;
+            veiculo.DataSaida = horaSaida;
 
-        // Atualize no banco de dados
-        var controller = new VeiculosController();
-        await controller.AtualizarStatusPagamentoAsync(veiculo.Placa, true);
+            // Atualize no banco de dados
+            var controller = new VeiculosController();
+            bool atualizado = controller.AtualizarStatusPagamentoAsync(veiculo.Placa, true, horaSaida);
+          
+
+
+           
 
         // Atualize a lista (se necessário, recarregue os dados)
         await DisplayAlert("Pagamento", "Status de pagamento atualizado!", "OK");
