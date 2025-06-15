@@ -61,7 +61,7 @@ namespace parkSmart.Controllers
 
             return
                 connection.Table<Veiculos>().
-                Where(x => x.Placa.Contains(value)).
+                Where(x => x.Placa==(value)).
                 ToList();
         }
 
