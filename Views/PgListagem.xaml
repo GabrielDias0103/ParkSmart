@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:parkSmart.Converters"
              x:Class="parkSmart.Views.PgListagem"
-             Title="PgListagem">
+             Title="Veículos Cadastrados"
+             BackgroundColor="White">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -12,64 +13,105 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <StackLayout Padding="10" Spacing="10">
-            <Entry x:Name="FiltroPlacaEntry" Placeholder="Filtrar por Placa" />
-            <DatePicker x:Name="FiltroDataPicker" />
-            <Picker x:Name="FiltroStatusPicker" Title="Status Pagamento">
+        <StackLayout Padding="20" Spacing="16">
+
+            <Label Text="Veículos Cadastrados"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#0E99FF"/>
+
+            <Label Text="Filtrar por placa" FontSize="14" TextColor="Black"/>
+            <Entry x:Name="FiltroPlacaEntry"
+                   Placeholder="Ex: ABC1234"
+                   BackgroundColor="#F0F0F0"
+                   TextColor="Black"/>
+
+            <Label Text="Filtrar por data de entrada" FontSize="14" TextColor="Black"/>
+            <DatePicker x:Name="FiltroDataPicker"
+                        BackgroundColor="#F0F0F0"
+                        TextColor="Black"/>
+
+            <Label Text="Filtrar por status de pagamento" FontSize="14" TextColor="Black"/>
+            <Picker x:Name="FiltroStatusPicker"
+                    Title="Status do Pagamento"
+                    FontSize="14"
+                    BackgroundColor="#F0F0F0"
+                    TextColor="Black">
                 <Picker.Items>
                     <x:String>Todos</x:String>
                     <x:String>Pago</x:String>
                     <x:String>Não Pago</x:String>
                 </Picker.Items>
             </Picker>
-            <Button Text="Aplicar Filtros" HorizontalOptions="Center" Clicked="btnAplicarFiltros_Clicked" BackgroundColor="#0E99FF" TextColor="White"/>
-            
-            <ListView x:Name="VeiculosListView" HasUnevenRows="True">
+
+            <Button Text="Aplicar Filtros"
+                    HorizontalOptions="Center"
+                    Clicked="btnAplicarFiltros_Clicked"
+                    BackgroundColor="#0E99FF"
+                    TextColor="White"
+                    FontAttributes="Bold"/>
+
+            <ListView x:Name="VeiculosListView"
+                      HasUnevenRows="True"
+                      BackgroundColor="White"
+                      SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10" Orientation="Horizontal" VerticalOptions="Center">
-                                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                                    <!-- <Image Source="{Binding FotoVeic}" WidthRequest="350" HeightRequest="200" Aspect="AspectFill" /> -->
-                                    <Label Text="{Binding Placa}" FontAttributes="Bold" />
-                                    <Label Text="{Binding Marca}" />
-                                    <Label Text="{Binding Modelo}" />
-                                    <Label Text="{Binding Cor}" />
-                                    <Label Text="{Binding NomeProprietario}" />
-                                    <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" FontAttributes="Italic"/>
-                                    <Label Text="{Binding DataSaida, StringFormat='Saída: {0:dd/MM/yyyy HH:mm}'}"
-                                            FontAttributes="Italic"
-                                            IsVisible="{Binding DataSaida, Converter={StaticResource NullToBoolConverter}}" />
+                            <Frame CornerRadius="10"
+                                   BackgroundColor="#F0F0F0"
+                                   BorderColor="#E0E0E0"
+                                   Padding="10"
+                                   Margin="5">
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+
+                                    <StackLayout VerticalOptions="CenterAndExpand"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Spacing="4">
+                                        <Label Text="{Binding Placa}" FontAttributes="Bold" FontSize="16" TextColor="#0B132B"/>
+                                        <Label Text="{Binding Marca}" FontSize="14" TextColor="Black"/>
+                                        <Label Text="{Binding Modelo}" FontSize="14" TextColor="Black"/>
+                                        <Label Text="{Binding Cor}" FontSize="14" TextColor="Black"/>
+                                        <Label Text="{Binding NomeProprietario}" FontSize="14" TextColor="Black"/>
+                                        <Label Text="{Binding DataEntrada, StringFormat='Entrada: {0:dd/MM/yyyy HH:mm}'}" FontAttributes="Italic" FontSize="13" TextColor="#555"/>
+                                        <Label Text="{Binding DataSaida, StringFormat='Saída: {0:dd/MM/yyyy HH:mm}'}"
+                                               FontAttributes="Italic"
+                                               FontSize="13"
+                                               TextColor="#555"
+                                               IsVisible="{Binding DataSaida, Converter={StaticResource NullToBoolConverter}}" />
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical"
+                                                 HorizontalOptions="End"
+                                                 VerticalOptions="Center"
+                                                 Spacing="10">
+                                        <Image x:Name="ImagemAlerta"
+                                               Source="aviso.png"
+                                               WidthRequest="30"
+                                               HeightRequest="30">
+                                            <Image.Triggers>
+                                                <DataTrigger TargetType="Image" Binding="{Binding Pago}" Value="True">
+                                                    <Setter Property="Source" Value="selecionado.png" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="btnPagamento_Clicked"
+                                                                      CommandParameter="{Binding .}" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+
+                                        <Image Source="lixeira.png"
+                                               WidthRequest="30"
+                                               HeightRequest="30">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="btnExcluir_Clicked"
+                                                                      CommandParameter="{Binding .}" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
                                 </StackLayout>
-
-                                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
-                                    <Image x:Name="ImagemAlerta"
-                                            Source="aviso.png"
-                                            WidthRequest="30"
-                                            HeightRequest="30">
-                                        <Image.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Pago}" Value="True">
-                                                <Setter Property="Source" Value="selecionado.png" />
-                                            </DataTrigger>
-                                        </Image.Triggers>
-
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Tapped="btnPagamento_Clicked"
-                                                CommandParameter="{Binding .}" />
-                                        </Image.GestureRecognizers>
-                                    </Image>
-
-
-                                    <Image Source="lixeira.png" WidthRequest="30" HeightRequest="30">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                            Tapped="btnExcluir_Clicked"
-                                            CommandParameter="{Binding .}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </StackLayout>
-                            </StackLayout>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

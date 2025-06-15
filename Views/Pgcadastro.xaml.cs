@@ -9,8 +9,8 @@ public partial class Pgcadastro : ContentPage
     private DateTime dataEntrada;
 
     public Pgcadastro()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         veiculosController = new VeiculosController();
         dataEntrada = DateTime.Now;
@@ -60,7 +60,7 @@ public partial class Pgcadastro : ContentPage
         string nomeProprietario = txtNomeProprietario.Text;
         string tipoPlano = TipoPicker.SelectedItem?.ToString();
         string fotoVeic = sImagemSelecionada?.ToString();
-        
+
 
         //Validar os registro
         if (string.IsNullOrEmpty(placa) ||
@@ -69,7 +69,7 @@ public partial class Pgcadastro : ContentPage
                 string.IsNullOrEmpty(tipoPlano) ||
                 string.IsNullOrEmpty(modelo) ||
                 string.IsNullOrEmpty(fotoVeic))
-                
+
         {
             //Se um dos dois estiver vazio
             //ja abortamos a rotina
@@ -172,4 +172,4 @@ public partial class Pgcadastro : ContentPage
             }
         }
     }
-}
+} 

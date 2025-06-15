@@ -71,7 +71,7 @@ public partial class PgListagem : ContentPage
             veiculo.Pago = true;
             veiculo.DataSaida = horaSaida;
 
-            // Atualize no banco de dados
+            // Atualize no banco de dados9
             var controller = new VeiculosController();
             bool atualizado = controller.AtualizarStatusPagamentoAsync(veiculo.Placa, true, horaSaida);
           
