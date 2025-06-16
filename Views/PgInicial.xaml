@@ -11,7 +11,7 @@
                              VerticalOptions="CenterAndExpand"
                              HorizontalOptions="Center">
 
-            <Label Text="Bem-vinda ao ParkSmart"
+            <Label Text="Bem-vindo ao ParkSmart"
                    FontSize="32"
                    FontAttributes="Bold"
                    TextColor="#0E99FF"
