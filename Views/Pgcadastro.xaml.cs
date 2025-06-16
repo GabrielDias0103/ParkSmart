@@ -9,8 +9,8 @@ public partial class Pgcadastro : ContentPage
     private DateTime dataEntrada;
 
     public Pgcadastro()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         veiculosController = new VeiculosController();
         dataEntrada = DateTime.Now;
@@ -31,7 +31,6 @@ public partial class Pgcadastro : ContentPage
         txtModelo.Text = "";
         txtCor.Text = "";
         txtNomeProprietario.Text = "";
-        checkPago.IsChecked = false;
         TipoPicker.SelectedIndex = -1;
         LimparImagem();
 
@@ -61,7 +60,7 @@ public partial class Pgcadastro : ContentPage
         string nomeProprietario = txtNomeProprietario.Text;
         string tipoPlano = TipoPicker.SelectedItem?.ToString();
         string fotoVeic = sImagemSelecionada?.ToString();
-        
+
 
         //Validar os registro
         if (string.IsNullOrEmpty(placa) ||
@@ -70,7 +69,7 @@ public partial class Pgcadastro : ContentPage
                 string.IsNullOrEmpty(tipoPlano) ||
                 string.IsNullOrEmpty(modelo) ||
                 string.IsNullOrEmpty(fotoVeic))
-                
+
         {
             //Se um dos dois estiver vazio
             //ja abortamos a rotina
@@ -100,7 +99,6 @@ public partial class Pgcadastro : ContentPage
         veiculo.NomeProprietario = nomeProprietario;
         veiculo.TipoPlano = tipoPlano;
         veiculo.FotoVeic = ImageService.CopiarImagem(sImagemSelecionada);
-        veiculo.Pago = checkPago.IsChecked;
         veiculo.DataEntrada = dataEntrada;
 
         //Chamara a rotina para copiar a imagem
@@ -122,7 +120,6 @@ public partial class Pgcadastro : ContentPage
             txtModelo.Text = "";
             txtCor.Text = "";
             txtNomeProprietario.Text = "";
-            checkPago.IsChecked = false;
             TipoPicker.SelectedIndex = -1;
             LimparImagem();
         }
@@ -167,7 +164,6 @@ public partial class Pgcadastro : ContentPage
                 txtCor.Text = veiculo.Cor;
                 txtNomeProprietario.Text = veiculo.NomeProprietario;
                 TipoPicker.SelectedItem = veiculo.TipoPlano;
-                checkPago.IsChecked = veiculo.Pago;
                 FotoImage.Source = veiculo.FotoVeic;
                 sImagemSelecionada = veiculo.FotoVeic;
                 btnRemover.IsVisible = !string.IsNullOrEmpty(veiculo.FotoVeic);
@@ -176,4 +172,4 @@ public partial class Pgcadastro : ContentPage
             }
         }
     }
-}
+} 

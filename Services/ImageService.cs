@@ -34,6 +34,9 @@
         public static string
             CopiarImagem(string sDirOriginal)
         {
+            // Verifica se o caminho da imagem original é válido
+            if (string.IsNullOrEmpty(sDirOriginal) || !File.Exists(sDirOriginal))
+                return null;
             string DiretorioDestino = "";
             //Precisamos gerar o diretorio para
             //salvar as imagens que ficara na 
@@ -74,9 +77,8 @@
             //e retornamos o diretorio da copia
             //para que o arquivo seja subistituido
             //caso ja exista = overwrite: true
-            File.Copy(sDirOriginal,
-                        DiretorioDestino,
-                            overwrite: true);
+
+
 
             return DiretorioDestino;
         }

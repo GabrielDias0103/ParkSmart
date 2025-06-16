@@ -52,21 +52,37 @@ public partial class PgListagem : ContentPage
         var veiculo = image?.BindingContext as Veiculos;
         if (veiculo == null) return;
 
-        // Mensagem de confirmação
-        bool confirmar = await DisplayAlert("Confirmação", "Deseja realmente marcar este veículo como pago?", "Sim", "Não");
+        if (veiculo.Pago == true)
+        {
+            await DisplayAlert("Aviso", "Veículo já está pago", "Ok");
+            return;
+        }
+        else
+        {
+
+        
+            // Mensagem de confirmação
+            bool confirmar = await DisplayAlert("Confirmação", "Deseja realmente marcar este veículo como pago?", "Sim", "Não");
         if (!confirmar)
             return;
 
-        // Atualiza o status para pago
-        veiculo.Pago = true;
+            // Atualiza o status para pago
+            var horaSaida = DateTime.Now;
+            veiculo.Pago = true;
+            veiculo.DataSaida = horaSaida;
 
-        // Atualize no banco de dados
-        var controller = new VeiculosController();
-        await controller.AtualizarStatusPagamentoAsync(veiculo.Placa, true);
+            // Atualize no banco de dados9
+            var controller = new VeiculosController();
+            bool atualizado = controller.AtualizarStatusPagamentoAsync(veiculo.Placa, true, horaSaida);
+          
+
+
+           
 
         // Atualize a lista (se necessário, recarregue os dados)
         await DisplayAlert("Pagamento", "Status de pagamento atualizado!", "OK");
         // Opcional: Reaplique filtros se estiverem ativos
+    }
     }
 
     private async void btnExcluir_Clicked(object sender, EventArgs e)

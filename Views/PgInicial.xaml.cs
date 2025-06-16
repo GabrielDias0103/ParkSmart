@@ -6,4 +6,9 @@ public partial class PgInicial : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void btnMenu_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.FlyoutIsPresented = true;
+    }
 }

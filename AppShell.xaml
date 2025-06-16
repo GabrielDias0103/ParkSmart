@@ -4,10 +4,17 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:parkSmart"
-    Shell.FlyoutBehavior="Flyout"
+  
     Title="parkSmart"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False"
+    Shell.FlyoutBackgroundColor="#0E99FF"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.TitleColor="White"
+    Shell.BackgroundColor="LightSkyBlue"
+    Shell.ForegroundColor="White"
+    Shell.NavBarHasShadow="False"
+      
     xmlns:Views="clr-namespace:parkSmart.Views">
 
     
@@ -23,24 +30,24 @@
         FlyoutDisplayOptions="AsMultipleItems">
 
         <ShellContent Title="Pagina Inicial"
-                      Icon="casa.png"
+                      Icon="home.png"
                       ContentTemplate=
                       "{DataTemplate Views:PgInicial}"/>
 
-        <ShellContent Title="Cadastro Cliente"
-                      Icon="carro.png"
+        <ShellContent Title="Cadastro de veículos"
+                      Icon="cadcarros.png"
                       ContentTemplate=
                       "{DataTemplate Views:Pgcadastro}"/>
 
         <ShellContent Title="Listagem de veículos"
-                      Icon="carros.png"
+                      Icon="listcarros.png"
                       ContentTemplate=
                       "{DataTemplate Views:PgListagem}"/>
     </FlyoutItem>
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="10">
-            <Label Text="v1.0.0" HorizontalOptions="StartAndExpand" />
+            <Label Text="v1.0.0" HorizontalOptions="StartAndExpand" FontAttributes="Italic"/>
             <Label Text="Desenvolvido por: Gabriel Dias, Giuliana Fogari e João Pedro Barboza" HorizontalOptions="StartAndExpand" />
         </StackLayout>
     </Shell.FlyoutFooter>
